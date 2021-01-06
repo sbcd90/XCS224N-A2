@@ -135,4 +135,4 @@ dmypy.json
 main.pdf
 
 # Solution-related files
-_(soln)
+*_(soln)*
