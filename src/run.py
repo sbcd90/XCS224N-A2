@@ -13,8 +13,7 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import time
 
-from word2vec import *
-from sgd import *
+from submission import *
 
 # Check Python Version
 import sys
@@ -70,7 +69,7 @@ visualize_vecs = word_vectors[visualize_idx, :]
 
 # save word vectors for evaluation
 sample_vectors = {word: list(vec) for word, vec in zip(visualize_words, visualize_vecs)}
-sample_vectors_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "sample_vectors.json")
+sample_vectors_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "sample_vectors_(soln).json")
 dump(sample_vectors, sample_vectors_path)
 
 temp = (visualize_vecs - np.mean(visualize_vecs, axis=0))
@@ -85,4 +84,4 @@ for i in range(len(visualize_words)):
 plt.xlim((np.min(coord[:, 0]), np.max(coord[:, 0])))
 plt.ylim((np.min(coord[:, 1]), np.max(coord[:, 1])))
 
-plt.savefig('word_vectors.png')
+plt.savefig('word_vectors_(soln).png')
