@@ -126,7 +126,7 @@ def test_naive_softmax_loss_and_gradient():
     dataset, dummy_vectors, dummy_tokens = dummy()
 
     print("\nYour Result:")
-    loss, dj_dv, dj_du = submission.naive_softmax_loss_and_gradient(
+    loss, dj_dvc, dj_du = submission.naive_softmax_loss_and_gradient(
         inputs['test_naivesoftmax']['center_word_vec'],
         inputs['test_naivesoftmax']['outside_word_idx'],
         inputs['test_naivesoftmax']['outside_vectors'],
@@ -135,7 +135,7 @@ def test_naive_softmax_loss_and_gradient():
 
     print(
         "Loss: {}\nGradient wrt Center Vector (dJ/dV):\n {}\nGradient wrt Outside Vectors (dJ/dU):\n {}\n".format(loss,
-                                                                                                                  dj_dv,
+                                                                                                                  dj_dvc,
                                                                                                                   dj_du))
 
     print("Expected Result: Value should approximate these:")
@@ -144,6 +144,7 @@ def test_naive_softmax_loss_and_gradient():
             outputs['test_naivesoftmax']['loss'],
             outputs['test_naivesoftmax']['dj_dvc'],
             outputs['test_naivesoftmax']['dj_du']))
+    return (outputs['test_naivesoftmax']['loss'], outputs['test_naivesoftmax']['dj_dvc'], outputs['test_naivesoftmax']['dj_du']), (loss, dj_dvc, dj_du)
 
 def test_sigmoid():
     print("\t\t\ttest sigmoid\t\t\t")
@@ -155,13 +156,14 @@ def test_sigmoid():
     print(s)
     print("Expected Result: Value should approximate these:")
     print(outputs['test_sigmoid']['s'])
+    return outputs['test_sigmoid']['s'], s
 
 def test_word2vec():
     """ Test the two word2vec implementations, before running on Stanford Sentiment Treebank """
     dataset, dummy_vectors, dummy_tokens = dummy()
 
     print("==== Gradient check for skip-gram with naive_softmax_loss_and_gradient ====")
-    gradcheck_naive(lambda vec: submission.word2vec_sgd_wrapper(
+    gradcheck_passed = gradcheck_naive(lambda vec: submission.word2vec_sgd_wrapper(
         submission.skipgram, dummy_tokens, vec, dataset, 5, submission.naive_softmax_loss_and_gradient),
                     dummy_vectors, "naive_softmax_loss_and_gradient Gradient")
 
@@ -183,6 +185,7 @@ def test_word2vec():
             outputs['test_word2vec']['loss'],
             outputs['test_word2vec']['dj_dv'],
             outputs['test_word2vec']['dj_du']))
+    return gradcheck_passed, (outputs['test_word2vec']['loss'], outputs['test_word2vec']['dj_dv'], outputs['test_word2vec']['dj_du']), (loss, dj_dv, dj_du)
 
 def hidden_test_sigmoid(x, soln, subm):
     points = 0
@@ -300,17 +303,25 @@ class Test_2a(GradedTestCase):
   @graded()
   def test_0(self):
     """2a-0-basic:  Word2vec sanity check 1"""
-    test_word2vec()
+    passed, sol, sub = test_word2vec()
+    self.assertTrue(passed)
+    self.assertTrue(np.allclose(sol[0], sub[0], rtol=1e-3))
+    self.assertTrue(np.allclose(sol[1], sub[1], rtol=1e-3))
+    self.assertTrue(np.allclose(sol[2], sub[2], rtol=1e-3))
 
   @graded()
   def test_1(self):
     """2a-1-basic:  Word2vec sanity check 2"""
-    test_naive_softmax_loss_and_gradient()
+    sol, sub = test_naive_softmax_loss_and_gradient()
+    self.assertTrue(np.allclose(sol[0], sub[0], rtol=1e-3))
+    self.assertTrue(np.allclose(sol[1], sub[1], rtol=1e-3))
+    self.assertTrue(np.allclose(sol[2], sub[2], rtol=1e-3))
 
   @graded()
   def test_2(self):
     """2a-2-basic:  Word2vec sanity check 3"""
-    test_sigmoid()
+    sol, sub = test_sigmoid()
+    self.assertTrue(np.allclose(sol, sub, rtol=1e-3))
 
   @graded(is_hidden=True, timeout=15)
   def test_3(self):

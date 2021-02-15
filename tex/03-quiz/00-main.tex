@@ -37,6 +37,9 @@ Choose all the equations that represent the differential of a sigmoid (When choo
 \item \begin{equation*}\frac{\partial \sigma(x)}{\partial x} = \frac{ (1-e^{-x})}{(1+e^{-x})^2}\end{equation*}
 \end{enumerate}
 
+% ### START CODE HERE ###
+% ### END CODE HERE ###
+
 \item \points{quiz2}
 What is the shape of the matrices U and V where (please refer to reading material from the handout):
 
@@ -54,6 +57,9 @@ $V$ is center vector matrix
 \item $U$ : (|embed_size| $\times$ |num_tokens|) ; $V$ : (|embed_size| $\times$ |num_tokens|) 
 \item $U$ : (|embed_size| $\times$ 1) ; $V$ : (|embed_size| $\times$ 1) 
 \end{enumerate}
+
+% ### START CODE HERE ###
+% ### END CODE HERE ###
 
 \item \points{quiz3}
 What is the shape of the gradient $\frac{\partial J_\text{naive-softmax}}{\partial V_c}$ matrix/vector where:
@@ -76,6 +82,9 @@ $y$ is the actual output
 \item |embed_size| $\times$ 1
 \item |embed_size| $\times$ |num_tokens|
 \end{enumerate}
+
+% ### START CODE HERE ###
+% ### END CODE HERE ###
 
 \item \points{quiz4}
 What is the shape of the gradient $\frac{\partial J_\text{naive-softmax}}{\partial U}$ (will be referred to $\frac{\partial J}{\partial U}$ for simplicity) matrix/vector where:
@@ -100,6 +109,9 @@ $y$ is the actual output
 \item |embed_size| $\times$ |num_tokens|
 \end{enumerate}
 
+% ### START CODE HERE ###
+% ### END CODE HERE ###
+
 \item \points{quiz5}
 Which of the below equations represents a general form of SGD where $g(x)$ is the gradient of loss function and $\eta$ is the learning rate:
 
@@ -109,6 +121,9 @@ Which of the below equations represents a general form of SGD where $g(x)$ is th
 \item \begin{equation*}x = {x - \frac{eta}{g(x)}}\end{equation*}
 \item \begin{equation*}x = {x - eta \cdot {\frac{\partial x}{\partial g(x)}}}\end{equation*}
 \end{enumerate}
+
+% ### START CODE HERE ###
+% ### END CODE HERE ###
 
 \item \points{quiz6}
 Negative sampling was briefly introduced the Lecture 2 video Word2Vec: Model Variants. \href{https://stackoverflow.com/questions/27860652/word2vec-negative-sampling-in-layman-term#answer-27864657}{Here} and \href{https://www.quora.com/What-is-negative-sampling}{here} you can find more written information about negative sampling. 
@@ -132,5 +147,8 @@ $v_c$ is the `center' vector representing center word c.
 \item In negative sampling, computation is cheaper. Instead of summing across all words (represented by uw in the above equation) we only sum across a few context/negative words(termed as negative samples).
 \item In negative sampling, the gradient is dependent on summation across all classes. In the case of word2vec, this means summing across all the words in the vocabulary(as can be seen in the above equation). This tends to slow down the training process.
 \end{enumerate}
+
+% ### START CODE HERE ###
+% ### END CODE HERE ###
 
 \end{enumerate}
