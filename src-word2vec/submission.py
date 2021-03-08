@@ -127,7 +127,7 @@ def skipgram(current_center_word, window_size, outside_words, word2ind, center_w
   word2vec_loss_and_gradient -- the loss and gradient function for
                              a prediction vector given the outsideWordIdx
                              word vectors, could be one of the two
-                             loss functions you implemented above.
+                             loss functions you implemented above (do not hardcode any of them).
 
   Return:
   loss -- the loss function value for the skip-gram model
