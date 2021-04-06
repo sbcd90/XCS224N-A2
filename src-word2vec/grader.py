@@ -9,6 +9,7 @@ from utils.utils import softmax
 from utils.utils import normalize_rows
 from scipy import spatial
 import os
+import traceback
 
 # Import student submission
 import submission
