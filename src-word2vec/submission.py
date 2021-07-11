@@ -56,8 +56,10 @@ def naive_softmax_loss_and_gradient(center_word_vec,outside_word_idx,outside_vec
                   (dJ / dU)
                   
    Note:
-   we usually use column vector convention (i.e., vectors are in column form) for vectors in matrix U and V (in the handout)
+   - we usually use column vector convention (i.e., vectors are in column form) for vectors in matrix U and V (in the handout)
    but for ease of implementation/programming we usually use row vectors (representing vectors in row form).
+   - A softmax() function provided (utils/utils.py) which takes as input a vector/matrix of values and returns the softmax for each value in the vector, relative to the others.
+
   """
 
   ### Please use the provided softmax function (imported earlier in this file)
