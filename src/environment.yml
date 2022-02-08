@@ -9,7 +9,6 @@ dependencies:
   - scipy=1.6.2
   - scikit-learn=0.24.2
   - matplotlib=3.3.4
-  - nltk=3.4.5
   - tqdm=4.59.0
   - docopt=0.6.2
   - notebook
@@ -21,4 +20,4 @@ dependencies:
     - timeout_decorator
     - "--find-links https://download.pytorch.org/whl/torch_stable.html"
     - torch==1.10.0+cpu
-    - torchvision==0.11.1
+    - torchvision==0.11.1+cpu
